@@ -2,6 +2,7 @@
 import streamlit as st
 import random
 
+show_image("tivoli_logo2.png", logo=True)
 st.set_page_config(page_title="Mandagschancen 🎰", page_icon="🎠")
 st.title("🎰 Mandagschancen - Prøv lykken!")
 
