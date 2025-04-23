@@ -1,12 +1,7 @@
 
 import streamlit as st
 import random
-import os
-from PIL import Image
 
-if os.path.exists("tivoli_logo2.png"):
-    img = Image.open("tivoli_logo2.png")
-    st.image(img, width=200)
 st.set_page_config(page_title="Mandagschancen 🎰", page_icon="🎠")
 st.title("🎰 Mandagschancen - Prøv lykken!")
 
