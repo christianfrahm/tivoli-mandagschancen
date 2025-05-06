@@ -3,14 +3,14 @@ import random
 import os
 from PIL import Image
 
-st.set_page_config(page_title="Mandagschancen 🎰", page_icon="🎠")
+st.set_page_config(page_title="Monday Chance 🎰", page_icon="🎠")
 
-# Tilføj Tivoli-logo øverst
+# Add Tivoli logo at the top
 if os.path.exists("tivoli_logo2.png"):
     img = Image.open("tivoli_logo2.png")
     st.image(img, width=200)
 
-st.title("🎰 Mandagschancen - Prøv lykken!")
+st.title("🎰 Monday Chance - Try Your Luck!")
 
 emojis = ["🎢", "🎠", "🎡", "🎯", "🍿", "🎟️"]
 
@@ -23,18 +23,20 @@ if "has_played" not in st.session_state:
 
 def generate_outcome():
     outcome = random.choices(
-        ["tab", "drikkevare", "turbillet"],
+        ["lose", "small_prize", "big_prize"],
         weights=[7, 2, 1],
         k=1
     )[0]
 
-    if outcome == "turbillet":
-        # Tre ens emojis
-        emoji = random.choice(emojis)
-        return [emoji, emoji, emoji], "🎉 Du har vundet en turbillet!"
+    small_prizes = ["a Tivoli postcard", "a Tivoli sticker", "a Tivoli badge"]
+    big_prizes = ["a ride ticket", "a free beverage of your choice", "a Tivoli keychain"]
 
-    elif outcome == "drikkevare":
-        # To ens og én forskellig
+    if outcome == "big_prize":
+        emoji = random.choice(emojis)
+        prize = random.choice(big_prizes)
+        return [emoji] * 3, f"🎉 Congratulations! You've won {prize}!"
+
+    elif outcome == "small_prize":
         emoji1 = random.choice(emojis)
         other_emojis = [e for e in emojis if e != emoji1]
         emoji2 = random.choice(other_emojis)
@@ -43,20 +45,20 @@ def generate_outcome():
         slots[pair_position[0]] = emoji1
         slots[pair_position[1]] = emoji1
         slots[[i for i in range(3) if i not in pair_position][0]] = emoji2
-        return slots, "🍹 Du har vundet en valgfri drikkevare!"
+        prize = random.choice(small_prizes)
+        return slots, f"🍹 You've won {prize}!"
 
     else:
-        # Tre forskellige emojis
         slots = random.sample(emojis, 3)
-        return slots, "😢 Desværre, du vandt ikke denne gang."
+        return slots, "😢 Sorry, no prize this time."
 
-# Start spillet
+# Start the game
 if not st.session_state.has_played:
-    if st.button("🎲 Spil Mandagschancen"):
+    if st.button("🎲 Play Monday Chance"):
         st.session_state.slots, st.session_state.result = generate_outcome()
         st.session_state.has_played = True
 
-# Vis slots og resultat
+# Display the slots and result
 st.markdown(f"""
     <div style='display: flex; justify-content: center; gap: 10px;'>
         <div style='font-size: 40px;'>{st.session_state.slots[0]}</div>
@@ -68,4 +70,4 @@ st.markdown(f"""
 if st.session_state.result:
     st.markdown("---")
     st.header(st.session_state.result)
-    st.markdown("🗓️ Spil med igen næste mandag!")
+    st.markdown("🗓️ Come back and play again next Monday!")
