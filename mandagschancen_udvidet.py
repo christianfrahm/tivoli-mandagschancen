@@ -28,8 +28,8 @@ def generate_outcome():
         k=1
     )[0]
 
-    drikkevarer = ["et Tivoli postkort!", "et Tivoli klistermærke!", "en Tivoli badge!"]
-    turbilletter = ["en turbillet!", "en valgfri drikkevare!", "en Tivoli nøglering!"]
+    drikkevarer = ["et Tivoli postkort", "et Tivoli klistermærke", "et Tivoli badge"]
+    turbilletter = ["en turbillet", "en valgfri drikkevare", "en Tivoli nøglering"]
 
     if outcome == "turbillet":
         emoji = random.choice(emojis)
