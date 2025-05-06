@@ -46,7 +46,7 @@ def generate_outcome():
         slots[pair_position[1]] = emoji1
         slots[[i for i in range(3) if i not in pair_position][0]] = emoji2
         drik = random.choice(drikkevarer)
-        return slots, f"🍹 Du har vundet en {drik}!"
+        return slots, f"🍹 Du har vundet {drik}!"
 
     else:
         slots = random.sample(emojis, 3)
